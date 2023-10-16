@@ -31,9 +31,7 @@ function addBookToLibrary() {
   myLibrary.push(new Book(bookAuthor, bookTitle, bookNumberOfPages, beenRead));
 }
 
-// Write a function that loops through the array and displays each book on the page. You can display them in some sort of table, or each on their own “card”.
-//
-// Function to display books in the library
+// Function to loop through the array and display each book on the page.
 function displayBooks() {
   // Remove all of the element's child nodes to initialize the display of books to null
   while (bookCards.firstChild) {
@@ -46,24 +44,39 @@ function displayBooks() {
 function generateBookCards() {
   // Loop through the array of books
   myLibrary.forEach((book, index) => {
-    // create a new div element
+    // create a new div elements
     const bookCard = document.createElement("div");
+    const booksNumber = document.createElement("div");
+    const booksTitle = document.createElement("div");
+    const booksAuthor = document.createElement("div");
+    const booksNumberOfPages = document.createElement("div");
+    const booksBeenRead = document.createElement("div");
 
-    // and give it some content
-    const newContent = document.createTextNode(`Book: ${index + 1}
-      Title: ${book.title}
-      Author: ${book.author}
-      Number of Pages: ${book.numberOfPages}
-      Been Read: ${book.beenRead ? "Yes" : "No"}`);
+    // Create content
+    const booksNumberContent = document.createTextNode(`Book: ${index + 1}`);
+    const booksTitleContent = document.createTextNode(`Title: ${book.title}`);
+    const booksAuthorContent = document.createTextNode(`Author: ${book.author}`);
+    const booksNumberOfPagesContent = document.createTextNode(`Number of Pages: ${book.numberOfPages}`);
+    const booksBeenReadContent = document.createTextNode(`Been Read: ${book.beenRead ? "Yes" : "No"}`);
 
-    // add the text node to the newly created div
-    bookCard.appendChild(newContent);
+    // Add the text node to the newly created div, bookCard.
+    booksNumber.appendChild(booksNumberContent);
+    booksTitle.appendChild(booksTitleContent);
+    booksAuthor.appendChild(booksAuthorContent);
+    booksNumberOfPages.appendChild(booksNumberOfPagesContent);
+    booksBeenRead.appendChild(booksBeenReadContent);
 
-    // add the newly created element and its content into the DOM
-    // const currentDiv = document.getElementById("div1");
-    // document.body.insertBefore(newDiv, currentDiv);
+    // Add bookCard children to bookCard
+    bookCard.appendChild(booksNumber);
+    bookCard.appendChild(booksTitle);
+    bookCard.appendChild(booksAuthor);
+    bookCard.appendChild(booksNumberOfPages);
+    bookCard.appendChild(booksBeenRead);
 
-    // Add book card to document
+    // Assign bookCard class to new bookCards
+    bookCard.classList.add('bookCard');
+
+    // Add book card to the DOM, bookCards.
     bookCards.appendChild(bookCard);
   });
 }
@@ -73,6 +86,7 @@ function generateBookCards() {
 
 // Add a button on each book’s display to change its read status.
 // To facilitate this you will want to create the function that toggles a book’s read status on your Book prototype instance.
+
 // NOTE: You’re not required to add any type of storage right now. You will have the option to come back to this project later on in the course.
 
 
