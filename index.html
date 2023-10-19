@@ -8,9 +8,28 @@
 </head>
 <body>
     <main>
-        <div class="bookCards">
-        </div>
+        <div class="rootContainer">
+            <div class="leftContainer">
+                <div class="bookCards"></div>
+            </div>
+            <div class="rightContainer">
+                <form action="POST" method="POST" id="myForm"><!-- Added method="POST" to the form -->
+                    <p>Input your book information when ready.</p>
+d
+                    <label for="title">TITLE (required):</label>
+                    <input type="text" id="title" name="title" placeholder="1984" autocomplete="on" required>
 
+                    <label for="author">AUTHOR (required):</label>
+                    <input type="text" id="author" name="author" placeholder="George Orwell" autocomplete="on" required>
+
+                    <label for="numberOfPages">NUMBER OF PAGES (required):</label>
+                    <input type="text" id="numberOfPages" name="numberOfPages" placeholder="328" autocomplete="on" required>
+                
+                    <label for="beenRead">BEEN READ (required):</label>
+                    <input type="text" id="beenRead" name="beenRead" placeholder="Yes/No" autocomplete="on" required>
+                </form>
+            </div>
+        </div>
     </main>
 
     <script src="script.js"></script>
