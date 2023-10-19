@@ -4,7 +4,12 @@ function Book (author, title, numberOfPages, beenRead) {
     this.title = title;
     this.numberOfPages = numberOfPages;
     this.beenRead = beenRead;
-  }
+}
+  
+// Add a method to the Book prototype that toggles the beenRead property
+Book.prototype.readToggle = function() {
+  this.beenRead = !this.beenRead;
+};
 
   // Get the bookCards element
 const bookCards = document.querySelector('.bookCards');
@@ -70,32 +75,39 @@ function displayBooks() {
     bookCard.appendChild(toggleReadButton);
     bookCard.appendChild(removeBookButton);
 
-    bookCard.setAttribute("id", "index");
+    bookCard.dataset.index = index;
 
     bookCards.appendChild(bookCard);
   });
 }
 
 function toggleRead(e) {
-  // Get the index of the book card that was clicked
-  const bookCardIndex = e.target.closest('.bookCard').getAttribute('id');
+  // Get the book card containing the clicked button
+  const thisBookCard = e.target.closest('.bookCard');
+    
+  const bookCardIndex = parseInt(thisBookCard.dataset.index, 10);
 
-  myLibrary[bookCardIndex].beenRead != myLibrary[bookCardIndex].beenRead;
+  const book = myLibrary[bookCardIndex];
 
-  // Toggle the stored value
-  // myLibrary[bookCardIndex].beenRead != myLibrary[bookCardIndex].beenRead;
-
-  // Update display with new array
-  displayBooks();
-}
+  book.readToggle();
+  
+  // Refresh the display after toggling read status
+  displayBooks();}
 
 function removeBook(e) {
-  // Get the index of the book card that was clicked
-  const bookCardIndex = e.target.closest('.bookCard').getAttribute('id');
+  // Get the book card containing the clicked button
+  const thisBookCard = e.target.closest('.bookCard');
+    
+  const bookCardIndex = parseInt(thisBookCard.dataset.index, 10);
+  
+  const book = myLibrary[bookCardIndex];
+    
   // Remove object from array
   myLibrary.splice(bookCardIndex, 1);
-  // Update display with new array
+    
+  // Refresh the display after removing book from library
   displayBooks();
+
 }
 
 // "NEW BOOK" button that runs addBookToLibrary when clicked
@@ -105,11 +117,6 @@ newBookButton.addEventListener('click', addBookToLibrary);
 document.body.appendChild(newBookButton);
 
 // Remaining tasks:
-
 // Modify addBookToLibrary to display a form for user input of book.
 // Use a sidebar, or dialogs and modals using the <dialog> tag?
-// Remember: event.preventDefault();
-
-
-// Add a button on each book’s display to change its read status.
-// To facilitate this you will want to create the function that toggles a book’s read status on your Book prototype instance.
+// Remember: event.preventDefault():
