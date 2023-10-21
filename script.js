@@ -5,36 +5,64 @@ function Book (author, title, numberOfPages, beenRead) {
     this.numberOfPages = numberOfPages;
     this.beenRead = beenRead;
 }
-  
+   
+// Create an empty array to store books
+const myLibrary = [];
+
 // Add a method to the Book prototype that toggles the beenRead property
 Book.prototype.readToggle = function() {
   this.beenRead = !this.beenRead;
 };
 
-  // Get the bookCards element
+// Get the bookCards element
 const bookCards = document.querySelector('.bookCards');
+
+// Create "NEW BOOK" button that runs displayForm when clicked
+const newBookButton = document.createElement('button');
+newBookButton.textContent = "NEW BOOK";
+newBookButton.addEventListener('click', toggleFormDisplay);
+
+// Get the form element
+const myForm = document.getElementById("myForm")
+    
+  myForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const bookAuthor = document.querySelector("#author").value.trim(); // trim() removes whitespace from the beginning and end of string.
+  const bookTitle = document.querySelector("#title").value.trim();
+  const bookNumberOfPages = document.querySelector("#numberOfPages").value.trim();
+  const bookBeenRead = document.querySelector("#beenRead").value.trim();
   
-// Create an empty array to store books
-const myLibrary = [];
-
-// Function to add a new book to the library array
-function addBookToLibrary() {
-  const bookTitle = prompt("Enter a book title: ");
-  const bookAuthor = prompt("Enter the book's author: ");
-  const bookNumberOfPages = parseInt(prompt("Enter the book's number of pages: "));
-  const bookBeenRead = prompt("Have you read the book? (yes or no)").toLowerCase();
   const beenRead = bookBeenRead === "yes";
-
+    
   myLibrary.push(new Book(bookAuthor, bookTitle, bookNumberOfPages, beenRead));
   
+  // Clear input field by setting its value to an empty string
+  document.getElementById("author").value = '';
+  document.getElementById("title").value = '';
+  document.getElementById("numberOfPages").value = '';
+  document.getElementById("beenRead").value = '';
+    
+  toggleFormDisplay();
+    
   // Display the books in the library
-  displayBooks(); 
+  displayBooks();
+  });
+
+  function toggleFormDisplay() {
+  let x = document.querySelector('form');
+  if (x.style.display === "none") {
+    x.style.display = "grid";
+  } else {
+    x.style.display = "none";
   }
+}
 
 // Function to display the books in the library
 function displayBooks() {
-  // Remove all of the element's child nodes
+  // Remove all of the bookCards' child nodes except the newBookButton
   bookCards.innerHTML = '';
+  bookCards.appendChild(newBookButton);
 
   // Generate a book card for each book in the library
   myLibrary.forEach((book, index) => {
@@ -65,7 +93,6 @@ function displayBooks() {
     const removeBookButton = document.createElement('button');
     removeBookButton.textContent = "REMOVE BOOK";
     removeBookButton.addEventListener('click', removeBook);
-
 
     bookCard.appendChild(bookNumber);
     bookCard.appendChild(bookTitle);
@@ -107,16 +134,6 @@ function removeBook(e) {
     
   // Refresh the display after removing book from library
   displayBooks();
-
 }
 
-// "NEW BOOK" button that runs addBookToLibrary when clicked
-const newBookButton = document.createElement('button');
-newBookButton.textContent = "NEW BOOK";
-newBookButton.addEventListener('click', addBookToLibrary);
-document.body.appendChild(newBookButton);
-
-// Remaining tasks:
-// Modify addBookToLibrary to display a form for user input of book.
-// Use a sidebar, or dialogs and modals using the <dialog> tag?
-// Remember: event.preventDefault():
+  displayBooks();

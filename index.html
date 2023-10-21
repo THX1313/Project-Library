@@ -13,20 +13,21 @@
                 <div class="bookCards"></div>
             </div>
             <div class="rightContainer">
-                <form action="POST" method="POST" id="myForm"><!-- Added method="POST" to the form -->
+                <form action="POST" method="POST" id="myForm">
                     <p>Input your book information when ready.</p>
-d
                     <label for="title">TITLE (required):</label>
-                    <input type="text" id="title" name="title" placeholder="1984" autocomplete="on" required>
+                    <input type="text" id="title" name="title" placeholder="1984" required>
 
                     <label for="author">AUTHOR (required):</label>
-                    <input type="text" id="author" name="author" placeholder="George Orwell" autocomplete="on" required>
+                    <input type="text" id="author" name="author" placeholder="George Orwell" required>
 
                     <label for="numberOfPages">NUMBER OF PAGES (required):</label>
-                    <input type="text" id="numberOfPages" name="numberOfPages" placeholder="328" autocomplete="on" required>
+                    <input type="text" id="numberOfPages" name="numberOfPages" placeholder="328" required>
                 
                     <label for="beenRead">BEEN READ (required):</label>
-                    <input type="text" id="beenRead" name="beenRead" placeholder="Yes/No" autocomplete="on" required>
+                    <input type="text" id="beenRead" name="beenRead" placeholder="yes/no" required>
+
+                    <button type="submit" form="myForm">SUBMIT</button>
                 </form>
             </div>
         </div>
